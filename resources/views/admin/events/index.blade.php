@@ -8,6 +8,11 @@
     <div class="py-12">
        
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            @session('success')
+            <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+                <span class="font-medium">{{$value}}</span> 
+            </div>
+          @endsession
             <a href="{{route('events.create')}}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Add Event</a>
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mt-4">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
@@ -42,7 +47,7 @@
                 </td>
                 
                 <td class="px-6 py-4">
-                    <img src="{{asset('/images/'.$event->image)}}" alt="" class="w-12 h-12 rounded-full">
+                    {!!$event->summary !!}
                 </td>
                 <td class="px-6 py-4">
                     {{-- <td class="border-b border-slate-100 dark:border-slate-700 pl-2 text-slate-500 dark:text-slate-400"> --}}

@@ -26,6 +26,31 @@
                         {{ __('Event') }}
                     </x-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('forewords.index')" :active="request()->routeIs('forewords.index')">
+                        {{ __('Foreword') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('abouts.index')" :active="request()->routeIs('abouts.index')">
+                        {{ __('About') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('galleries.index')" :active="request()->routeIs('galleries.index')">
+                        {{ __('Galleries') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('contacts.index')" :active="request()->routeIs('contacts.index')">
+                        {{ __('Messages') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('performers.index')" :active="request()->routeIs('performers.index')">
+                        {{ __('Performers') }}
+                    </x-nav-link>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->
