@@ -29,7 +29,14 @@ class ContactUsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            "name"=> "required|string",
+            "email"=> "required|email",
+            "subject"=>"required|string",
+            "message"=>"required"
+        ]);
+        Contact::create($request->all());
+        return redirect()->route("contact.create")->with("success","Thank you for your message.");
     }
 
     /**

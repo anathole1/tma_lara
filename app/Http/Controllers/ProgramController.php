@@ -2,20 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Event;
+use App\Models\Program;
 use File;
 use Illuminate\Http\Request;
-use Auth;
 
-class EventController extends Controller
+class ProgramController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $events = Event::orderBy("created_at","desc")->paginate(10);
-        return view("admin.events.index", compact("events"));
+        $programs = Program::orderBy("id","desc")->paginate(10);
+        return view("admin.programs.index", compact("programs"));
     }
 
     /**
@@ -23,7 +22,7 @@ class EventController extends Controller
      */
     public function create()
     {
-        return view("admin.events.create");
+        return view("admin.programs.create");
     }
 
     /**
@@ -31,9 +30,9 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+         $request->validate([
             'title' => 'required',
-            'summary' => 'required',
+            'category' => 'required',
             'description'=>'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
           ]);
@@ -46,15 +45,15 @@ class EventController extends Controller
               $image->move(public_path($destinationPath), $profileImage);
               $input['image'] = "$profileImage";
           }
-          $input['user_id'] = Auth::user()->id;
-          Event::create($input);
-          return redirect()->route('events.index')->with('success', 'Event created successfully.');
+        
+          Program::create($input);
+          return redirect()->route('programs.index')->with('success', 'programs created successfully.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Event $event)
+    public function show(Program $program)
     {
         //
     }
@@ -62,27 +61,26 @@ class EventController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Event $event)
+    public function edit(Program $program)
     {
-        return view('admin.events.edit', compact('event'));
+        return view('admin.programs.edit', compact('program'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Event $event)
+    public function update(Request $request, Program $program)
     {
-       $request->validate([
+         $request->validate([
             'title' => 'required',
-            'summary' => 'required',
+            'category' => 'required',
             'description'=>'required',
-            // 'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
           ]);
         
           $input = $request->all();
     
          if ($request->file('image') && request('image') != '') {
-            $imagePath = public_path('media/'.$event->image);
+            $imagePath = public_path('media/'.$program->image);
             if(File::exists($imagePath)){
                 unlink($imagePath);
             }
@@ -95,31 +93,16 @@ class EventController extends Controller
               unset($input['image']);
           }
               
-          
-          $input['user_id'] = Auth::user()->id;
-          $event->update($input);
-          return redirect()->route('events.index')->with('success', 'Event updated successfully.'); 
+          $program->update($input);
+            return redirect()->route('programs.index')->with('success','programs updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Event $event)
+    public function destroy(Program $program)
     {
-        $event->delete();
-        return redirect()->route('events.index')->with('success','Event deleted successfully');
-    }
-
-    public function upload(Request $request){
-        if($request->hasFile('upload')){
-            $originName = $request->file('upload')->getClientOriginalName();
-            $fileName = pathinfo($originName, PATHINFO_FILENAME);
-            $extension= $request->file('upload')->getClientOriginalExtension();
-            $fileName = $fileName . '_'. time() .'.' .$extension;
-            $request->file('upload')->move(public_path('media'), $fileName);
-            $url = asset('media/'.$fileName);
-            return response()->json(['fileName'=>$fileName, 'uploaded'=>1, 'url'=>$url]);
-        }
-
+        $program->delete();
+        return redirect()->route('programs.index')->with('success','programs deleted successfully.');
     }
 }

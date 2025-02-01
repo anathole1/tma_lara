@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Foreword;
+use File;
 use Illuminate\Http\Request;
 
 class ForewordController extends Controller
 {
     /**
      * Display a listing of the resource.
+     * 
+     * 
      */
     public function index()
     {
@@ -81,7 +84,12 @@ class ForewordController extends Controller
         
           $input = $request->all();
     
-          if ($image = $request->file('image')) {
+        if ($request->file('image') && request('image') != '') {
+            $imagePath = public_path('images/'.$foreword->image);
+            if(File::exists($imagePath)){
+                unlink($imagePath);
+            }
+            $image = $request->file('image');
               $destinationPath = 'images/';
               $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
               $image->move(public_path($destinationPath), $profileImage);

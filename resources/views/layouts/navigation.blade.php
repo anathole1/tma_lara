@@ -51,6 +51,11 @@
                         {{ __('Performers') }}
                     </x-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('programs.index')" :active="request()->routeIs('programs.index')">
+                        {{ __('programs') }}
+                    </x-nav-link>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->

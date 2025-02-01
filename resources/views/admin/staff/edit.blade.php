@@ -33,12 +33,12 @@
         <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
         <select id="category" name="category" value="{{$staff->category}}" class=" @error('category') is-invalid @enderror  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
       
-          <option value="1">APPES Executive Committee</option>
-          <option value="2">APPES Audit Committee</option>
-          <option value="3">APPES Conflict Resolution Committee</option>
-          <option value="4">TMA Administrative Staff</option>
-          <option value="5">Other APPES Members</option>
-          <option value="6">Honour APPES Members</option>
+          <option value="APPES Executive Committee">APPES Executive Committee</option>
+          <option value="APPES Audit Committee">APPES Audit Committee</option>
+          <option value="APPES Conflict Resolution Committee">APPES Conflict Resolution Committee</option>
+          <option value="TMA Administrative Staff">TMA Administrative Staff</option>
+          <option value="Other APPES Members">Other APPES Members</option>
+          <option value="Honour APPES Members">Honour APPES Members</option>
         </select>
         @error('category')
                 <div class="form-text text-danger">{{ $message }}</div>

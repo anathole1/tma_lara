@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Performer;
+use File;
 use Illuminate\Http\Request;
 
 class PerformerController extends Controller
@@ -83,7 +84,12 @@ class PerformerController extends Controller
         
           $input = $request->all();
     
-          if ($image = $request->file('image')) {
+         if ($request->file('image') && request('image') != '') {
+            $imagePath = public_path('images/'.$performer->image);
+            if(File::exists($imagePath)){
+                unlink($imagePath);
+            }
+            $image = $request->file('image');
               $destinationPath = 'images/';
               $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
               $image->move(public_path($destinationPath), $profileImage);
