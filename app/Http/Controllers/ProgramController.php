@@ -13,7 +13,7 @@ class ProgramController extends Controller
      */
     public function index()
     {
-        $programs = Program::orderBy("id","desc")->paginate(10);
+        $programs = Program::orderBy("id","desc")->paginate(10); 
         return view("admin.programs.index", compact("programs"));
     }
 

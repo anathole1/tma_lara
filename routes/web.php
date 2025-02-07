@@ -1,12 +1,14 @@
 <?php
 
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\ForewordController;
 use App\Http\Controllers\frontend\ClubsController;
 use App\Http\Controllers\frontend\ContactUsController;
 use App\Http\Controllers\frontend\AboutsController;
+use App\Http\Controllers\frontend\AnnouncementsController;
 use App\Http\Controllers\frontend\EventsController;
 use App\Http\Controllers\frontend\GalleriesController;
 use App\Http\Controllers\frontend\HomeController;
@@ -28,6 +30,7 @@ Route::get('/',[HomeController::class,'index'])->name('home');
 Route::get('about_us/',[AboutsController::class,'index'])->name('about.index');
 Route::get('articles/',[EventsController::class,'index'])->name('event.index');
 Route::get('/events/view/{id}',[EventsController::class, 'ViewAll']);
+Route::get('announcements/',[AnnouncementsController::class,'index'])->name('announcements.index');
 //frontend
 
 Route::get('contactus/',[ContactUsController::class,'create'])->name('contact.create');
@@ -60,5 +63,6 @@ Route::resource('galleries',GalleryController::class)->middleware('auth');
 Route::resource('contacts',ContactController::class)->middleware('auth')->except('create','store');
 Route::resource('performers',PerformerController::class)->middleware('auth');
 Route::resource('programs',ProgramController::class)->middleware('auth');
+Route::resource('announcement',AnnouncementController::class)->middleware('auth');
 
 require __DIR__.'/auth.php';
